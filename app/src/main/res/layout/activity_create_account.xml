@@ -7,4 +7,75 @@
     android:background="@color/black"
     tools:context=".CreateAccount">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingTop="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/emailTextView"
+            android:paddingTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Email Address"
+            android:textColor="@color/white" />
+
+        <EditText
+            android:id="@+id/emailAddress"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:ems="10"
+            android:inputType="textEmailAddress" />
+        <TextView
+            android:id="@+id/createPassword"
+            android:paddingTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Create Password"
+            android:textColor="@color/white" />
+
+        <EditText
+            android:id="@+id/createdPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:ems="10" />
+
+        <TextView
+            android:id="@+id/repeatPassword"
+            android:paddingTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Repeat Password"
+            android:textColor="@color/white" />
+
+        <EditText
+            android:id="@+id/repeatedPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:ems="10" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:paddingTop="30dp"
+            android:paddingBottom="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/password_note"
+            android:textColor="@color/white"/>
+
+        <Button
+            android:id="@+id/nextButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="NEXT" />
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

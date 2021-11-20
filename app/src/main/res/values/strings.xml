@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Assignment1</string>
+    <string name="password_note">Your Password should have a minimum of 8 characters and contain at least one number, one uppercase
+    and one lowercase letter. You can use special characters.</string>
 </resources>
