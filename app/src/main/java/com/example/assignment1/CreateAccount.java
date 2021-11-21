@@ -102,13 +102,15 @@ public class CreateAccount extends AppCompatActivity {
                 }
             }
             public boolean validpass(final String pw){
-                Pattern pattern;
-                Matcher matcher;
-                final String PASSWORD_PATTERN = "^(?=.*[A-Za-z])(?=.*\\\\d)(?=.*[$@$!%*#?&])[A-Za-z\\\\d$@$!%*#?&]{8,}$";
-                pattern = Pattern.compile(PASSWORD_PATTERN);
-                matcher = pattern.matcher(pw);
+                Pattern uppercase = Pattern.compile("[A-Z]");
+                Pattern lowercase = Pattern.compile("[a-z]");
+                Pattern digit = Pattern.compile("[0-9]");
 
-                return matcher.matches();
+                if (!lowercase.matcher(pw).find()) return false;
+                else if (!uppercase.matcher(pw).find()) return false;
+                else if (!digit.matcher(pw).find()) return false;
+                else if(pw.length()<8) return false;
+                else return true;
             }
         });
 
