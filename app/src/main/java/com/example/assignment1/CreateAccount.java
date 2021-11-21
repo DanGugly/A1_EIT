@@ -8,6 +8,7 @@ import android.text.TextWatcher;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -17,6 +18,7 @@ public class CreateAccount extends AppCompatActivity {
     private Button next;
     private String valid_email;
     private String password;
+    private ArrayList<String> elist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,9 @@ public class CreateAccount extends AppCompatActivity {
         rpassword = findViewById(R.id.repeatedPassword);
 
         next = findViewById(R.id.nextButton);
+
+        elist = new ArrayList<>();
+        elist.add("test@123.com");
     }
 
     @Override
@@ -65,7 +70,11 @@ public class CreateAccount extends AppCompatActivity {
                 } else if (!isEmailValid(edt.getText().toString())) {
                     edt.setError("Invalid Email Address");
                     valid_email = null;
-                } else {
+                } else if (oldEmail(edt.getText().toString())) {
+                    edt.setError("Email Address already exists");
+                    valid_email = null;
+                }
+                else {
                     valid_email = edt.getText().toString();
                 }
             }
@@ -74,6 +83,10 @@ public class CreateAccount extends AppCompatActivity {
                 return android.util.Patterns.EMAIL_ADDRESS.matcher(email)
                         .matches();
             } // end of TextWatcher (email)
+
+            boolean oldEmail(final String email){
+                return elist.contains(email);
+            }
         });
 
         cpassword.addTextChangedListener(new TextWatcher() {
