@@ -2,4 +2,8 @@
     <string name="app_name">Assignment1</string>
     <string name="password_note">Your Password should have a minimum of 8 characters and contain at least one number, one uppercase
     and one lowercase letter. You can use special characters.</string>
+    <string name="greenflag_desc">GreenFlag customers can create an account to access</string>
+    <string name="gf_service1">Car health updates</string>
+    <string name="gf_service2">Request a rescue online</string>
+    <string name="gf_service3">Policy information</string>
 </resources>
