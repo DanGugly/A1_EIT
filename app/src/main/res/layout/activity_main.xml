@@ -28,7 +28,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@mipmap/gradientbutton_foreground" />
+        android:background="none"
+        app:srcCompat="@drawable/image_button" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/tableLayout"
