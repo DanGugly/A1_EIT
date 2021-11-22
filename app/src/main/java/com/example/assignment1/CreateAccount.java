@@ -2,11 +2,14 @@ package com.example.assignment1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -19,6 +22,7 @@ public class CreateAccount extends AppCompatActivity {
     private String valid_email;
     private String password;
     private ArrayList<String> elist;
+    private ImageButton back_butn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +34,8 @@ public class CreateAccount extends AppCompatActivity {
         rpassword = findViewById(R.id.repeatedPassword);
 
         next = findViewById(R.id.nextButton);
+
+        back_butn = findViewById(R.id.back_butn);
 
         elist = new ArrayList<>();
         elist.add("test@123.com");
@@ -155,6 +161,14 @@ public class CreateAccount extends AppCompatActivity {
 
             });
         }
+
+        back_butn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivityForResult(myIntent, 0);
+            }
+        });
     }
 
     private boolean validated(){
