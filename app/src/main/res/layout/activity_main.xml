@@ -9,14 +9,14 @@
 
     <ImageView
         android:id="@+id/greenflagLogo"
-        android:layout_width="327dp"
-        android:layout_height="293dp"
-        app:layout_constraintBottom_toTopOf="@+id/tableLayout"
+        android:layout_width="296dp"
+        android:layout_height="227dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.095"
-        app:srcCompat="@mipmap/greenflag_logo_foreground" />
+        app:srcCompat="@drawable/logo_green_flag" />
 
     <ImageButton
         android:id="@+id/createAccount"
@@ -34,11 +34,10 @@
         android:id="@+id/tableLayout"
         android:layout_width="251dp"
         android:layout_height="205dp"
-        android:layout_marginBottom="120dp"
+        android:layout_marginBottom="152dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/createAccount"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.675"
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
