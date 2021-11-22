@@ -28,7 +28,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="none"
         app:srcCompat="@drawable/image_button" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -39,6 +38,7 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/createAccount"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.637"
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
