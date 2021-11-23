@@ -21,7 +21,9 @@
             android:layout_height="wrap_content"
             android:background="@color/black"
             android:src="@drawable/back_button"
-            />
+            android:tooltipText="Back"
+            tools:ignore="SpeakableTextPresentCheck"
+            tools:layout_editor_absoluteX="16dp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -63,7 +65,8 @@
             android:layout_height="50dp"
             android:background="@color/white"
             android:ems="10"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <TextView
             android:id="@+id/createPassword"
@@ -98,7 +101,9 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@color/white"
-            android:ems="10" />
+            android:inputType="textPassword"
+            android:ems="10"
+            tools:ignore="SpeakableTextPresentCheck" />
 
         <TextView
             android:id="@+id/textView3"
