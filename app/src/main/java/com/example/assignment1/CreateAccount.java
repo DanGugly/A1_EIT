@@ -2,10 +2,14 @@ package com.example.assignment1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,6 +25,10 @@ public class CreateAccount extends AppCompatActivity {
     private Button next;
     private String valid_email;
     private String password;
+    private String SHARED_PREFS = "MY_SHARED_PREFS";
+    private int count = 0;
+    private static String counts = "COUNT";
+    private static String email_id = "EMAIL_ID";
     private ArrayList<String> elist;
     private ImageButton back_butn;
 
@@ -36,9 +44,20 @@ public class CreateAccount extends AppCompatActivity {
         next = findViewById(R.id.nextButton);
 
         back_butn = findViewById(R.id.back_butn);
-
         elist = new ArrayList<>();
-        elist.add("test@123.com");
+
+        SharedPreferences sharedPreferences = getBaseContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+        count = sharedPreferences.getInt(counts, 0);
+
+        if (count == 0){
+            sharedPreferences.edit().putInt(counts, 1).apply();
+        } else if(count>1){
+            for (int x=2; x<=count; x++){
+                Log.d("Shared_Pref",sharedPreferences.getString(email_id+x,null));
+                elist.add(sharedPreferences.getString(email_id+x, null));
+            }
+        }
+        //elist.add("test@123.com");
     }
 
     @Override
@@ -69,19 +88,35 @@ public class CreateAccount extends AppCompatActivity {
                 Is_Valid_Email(email); // pass your EditText Obj here.
             }
 
+            @SuppressLint("ResourceAsColor")
             public void Is_Valid_Email(EditText edt) {
                 if (edt.getText().toString() == null) {
                     edt.setError("Invalid Email Address");
+                    //email.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.cross_foreground, 0, 0, 0);
                     valid_email = null;
+                    //if(valid!=0) valid-=1;
                 } else if (!isEmailValid(edt.getText().toString())) {
                     edt.setError("Invalid Email Address");
+                    //email.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.cross_foreground, 0, 0, 0);
                     valid_email = null;
+                    //if(valid!=0) valid-=1;
                 } else if (oldEmail(edt.getText().toString())) {
                     edt.setError("Email Address already exists");
+                    //email.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.cross_foreground, 0, 0, 0);
                     valid_email = null;
+                    //if(valid!=0) valid-=1;
                 }
                 else {
                     valid_email = edt.getText().toString();
+                    Log.d("VALID", "Email valid");
+                    cpassword.setFocusable(true);
+                    //valid+=1;
+                    //email.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.mipmap.tick_foreground, 0);
+                    Drawable myIcon = getResources().getDrawable(R.mipmap.tick_foreground);
+                    myIcon.setBounds(0, 0, myIcon.getIntrinsicWidth(), myIcon.getIntrinsicHeight());
+                    //email.setError(null);
+                    email.setError( " ",myIcon);
+                    //email.setHighlightColor(R.color.teal_200);
                 }
             }
 
@@ -118,6 +153,8 @@ public class CreateAccount extends AppCompatActivity {
                     pw.setError("Password must contain at least 8 characters, 1 upper & lowercase");
                 }else {
                     password = pw.getText().toString();
+                    rpassword.setFocusable(true);
+                    Log.d("VALID", "Password valid");
                 }
             }
             public boolean validpass(final String pw){
@@ -148,8 +185,12 @@ public class CreateAccount extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 if(rpassword.getText().toString()==null||!(cpassword.getText().toString().equals(rpassword.getText().toString()))){
                     rpassword.setError("Passwords don't match!");
-                }else {
 
+                    //if(valid!=0) valid-=1;
+                }else {
+                    next.setFocusable(true);
+                    Log.d("VALID", "Repeated Password valid");
+                    //valid+=1;
                 }
             }
         });
@@ -158,7 +199,18 @@ public class CreateAccount extends AppCompatActivity {
             //next.setHighlighted // Highlight button after validations passed
             next.setOnClickListener(v -> {
                 //Save email and password locally
-
+                SharedPreferences sharedPreferences = getBaseContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+                if(count<2) count=2; else count++;
+                sharedPreferences.edit().putInt(counts, count).apply();
+                Log.d("Shared_Pref","Count: "+count+" Val = "+email.getText().toString());
+                sharedPreferences.edit().putString(email_id+count, valid_email).apply();
+                elist.add(valid_email);
+                email.setText("");
+                email.setError(null);
+                cpassword.setText("");
+                cpassword.setError(null);
+                rpassword.setText("");
+                rpassword.setError(null);
             });
         }
 
@@ -172,6 +224,10 @@ public class CreateAccount extends AppCompatActivity {
     }
 
     private boolean validated(){
-        return true;
+        //if(valid==3){
+            return true;
+        /*}else {
+            return false;
+        }*/
     }
 }
