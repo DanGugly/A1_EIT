@@ -83,6 +83,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="@color/white"
+            android:inputType="textPassword"
             android:ems="10"
             android:hint="@string/see_criteria_below" />
 
@@ -114,13 +115,20 @@
             android:paddingBottom="30dp"
             android:text="@string/password_note"
             android:textColor="@color/white" />
-
-        <Button
-            android:id="@+id/nextButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:enabled="true"
-            android:text="NEXT" />
-
     </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/nextButton"
+        android:layout_width="337dp"
+        android:layout_height="56dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="50dp"
+        android:background="@drawable/next"
+        android:alpha=".5"
+        android:text="@string/next"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

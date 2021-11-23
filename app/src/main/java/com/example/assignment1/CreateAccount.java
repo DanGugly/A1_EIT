@@ -25,10 +25,12 @@ public class CreateAccount extends AppCompatActivity {
     private Button next;
     private String valid_email;
     private String password;
+    private String password2;
     private String SHARED_PREFS = "MY_SHARED_PREFS";
     private int count = 0;
     private static String counts = "COUNT";
     private static String email_id = "EMAIL_ID";
+    Drawable myIcon ;
     private ArrayList<String> elist;
     private ImageButton back_butn;
 
@@ -40,6 +42,9 @@ public class CreateAccount extends AppCompatActivity {
         email = findViewById(R.id.emailAddress);
         cpassword = findViewById(R.id.createdPassword);
         rpassword = findViewById(R.id.repeatedPassword);
+
+        myIcon = getResources().getDrawable(R.mipmap.tick_foreground);
+        myIcon.setBounds(0, 0, 170, 170);
 
         next = findViewById(R.id.nextButton);
 
@@ -110,12 +115,13 @@ public class CreateAccount extends AppCompatActivity {
                     valid_email = edt.getText().toString();
                     Log.d("VALID", "Email valid");
                     cpassword.setFocusable(true);
+                    validatedU();
                     //valid+=1;
-                    //email.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.mipmap.tick_foreground, 0);
-                    Drawable myIcon = getResources().getDrawable(R.mipmap.tick_foreground);
-                    myIcon.setBounds(0, 0, myIcon.getIntrinsicWidth(), myIcon.getIntrinsicHeight());
+
+                    //email.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.tick, 0);
+
                     //email.setError(null);
-                    email.setError( " ",myIcon);
+                    email.setError( "",myIcon);
                     //email.setHighlightColor(R.color.teal_200);
                 }
             }
@@ -153,7 +159,10 @@ public class CreateAccount extends AppCompatActivity {
                     pw.setError("Password must contain at least 8 characters, 1 upper & lowercase");
                 }else {
                     password = pw.getText().toString();
+                    //cpassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.tick, 0);
+                    cpassword.setError( " ",myIcon);
                     rpassword.setFocusable(true);
+                    validatedU();
                     Log.d("VALID", "Password valid");
                 }
             }
@@ -185,34 +194,36 @@ public class CreateAccount extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 if(rpassword.getText().toString()==null||!(cpassword.getText().toString().equals(rpassword.getText().toString()))){
                     rpassword.setError("Passwords don't match!");
-
-                    //if(valid!=0) valid-=1;
+                    validatedU();
                 }else {
-                    next.setFocusable(true);
+                    rpassword.setError( " ",myIcon);
+                    //rpassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.tick, 0);
+                    password2 = rpassword.getText().toString();
                     Log.d("VALID", "Repeated Password valid");
-                    //valid+=1;
+                    validatedU();
                 }
             }
         });
 
-        if(validated()){
             //next.setHighlighted // Highlight button after validations passed
             next.setOnClickListener(v -> {
-                //Save email and password locally
-                SharedPreferences sharedPreferences = getBaseContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
-                if(count<2) count=2; else count++;
-                sharedPreferences.edit().putInt(counts, count).apply();
-                Log.d("Shared_Pref","Count: "+count+" Val = "+email.getText().toString());
-                sharedPreferences.edit().putString(email_id+count, valid_email).apply();
-                elist.add(valid_email);
-                email.setText("");
-                email.setError(null);
-                cpassword.setText("");
-                cpassword.setError(null);
-                rpassword.setText("");
-                rpassword.setError(null);
+                if(validated()){
+                    //Save email and password locally
+                    SharedPreferences sharedPreferences = getBaseContext().getSharedPreferences(SHARED_PREFS, MODE_PRIVATE);
+                    if(count<2) count=2; else count++;
+                    sharedPreferences.edit().putInt(counts, count).apply();
+                    Log.d("Shared_Pref","Count: "+count+" Val = "+email.getText().toString());
+                    sharedPreferences.edit().putString(email_id+count, valid_email).apply();
+                    elist.add(valid_email);
+                    email.setText("");
+                    email.setError(null);
+                    cpassword.setText("");
+                    cpassword.setError(null);
+                    rpassword.setText("");
+                    rpassword.setError(null);
+                }
             });
-        }
+
 
         back_butn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -224,10 +235,31 @@ public class CreateAccount extends AppCompatActivity {
     }
 
     private boolean validated(){
-        //if(valid==3){
-            return true;
-        /*}else {
-            return false;
+        //try {
+            if(!email.getText().toString().equals("") && !cpassword.getText().toString().equals("")
+                    && !rpassword.getText().toString().equals("")){
+                //next.setAlpha(1);
+                //next.setEnabled(true);
+                return true;
+            }else {
+                //next.setAlpha(0.5F);
+                //next.setEnabled(false);
+                return false;
+            }/*
+        }catch (Exception e){
+            Log.d("Exception",e.getStackTrace().toString());
         }*/
+    }
+    private void validatedU(){
+        try {
+            if(!valid_email.equals("") && !password.equals("")
+                    && !password2.equals("")){
+                next.setAlpha(1);
+            }else {
+                next.setAlpha(0.5F);
+            }
+        }catch (Exception e){
+
+        }
     }
 }
