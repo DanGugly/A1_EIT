@@ -58,7 +58,7 @@ public class CreateAccount extends AppCompatActivity {
             sharedPreferences.edit().putInt(counts, 1).apply();
         } else if(count>1){
             for (int x=2; x<=count; x++){
-                Log.d("Shared_Pref",sharedPreferences.getString(email_id+x,null));
+                //Log.d("Shared_Pref",sharedPreferences.getString(email_id+x,null));
                 elist.add(sharedPreferences.getString(email_id+x, null));
             }
         }
