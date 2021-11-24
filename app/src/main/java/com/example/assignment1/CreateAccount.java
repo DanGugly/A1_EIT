@@ -17,7 +17,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CreateAccount extends AppCompatActivity {
@@ -110,12 +109,14 @@ public class CreateAccount extends AppCompatActivity {
                     error_email.setVisibility(View.VISIBLE);
                     //email.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.cross_foreground, 0, 0, 0);
                     //valid_email = null;
+                    email.setBackgroundResource(R.drawable.fronttext);
                     validatedU();
                 } else if (oldEmail(edt.getText().toString())) {
                     //edt.setError("Email Address already exists");
                     error_email.setText(R.string.email_dup);
                     error_email.setVisibility(View.VISIBLE);
                     //valid_email = null;
+                    email.setBackgroundResource(R.drawable.fronttext);
                     validatedU();
                 }
                 else {
@@ -130,6 +131,7 @@ public class CreateAccount extends AppCompatActivity {
 
                     //email.setError(null);
                     email.setError( "",myIcon);
+                    email.setBackgroundResource(R.drawable.backtext);
                 }
             }
 
@@ -166,11 +168,13 @@ public class CreateAccount extends AppCompatActivity {
                     //pw.setError("Password must contain at least 8 characters, 1 upper & lowercase");
                     error_msg.setVisibility(View.VISIBLE);
                     error_msg.setText(R.string.pass_invalid);
+                    cpassword.setBackgroundResource(R.drawable.fronttext);
                     validatedU();
                 }else {
                     password = pw.getText().toString();
                     //cpassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.tick, 0);
                     cpassword.setError( " ",myIcon);
+                    cpassword.setBackgroundResource(R.drawable.backtext);
                     rpassword.setFocusable(true);
                     error_msg.setVisibility(View.GONE);
                     error_msg.setText("");
@@ -208,9 +212,11 @@ public class CreateAccount extends AppCompatActivity {
                     //rpassword.setError("Passwords don't match!");
                     error_msg.setVisibility(View.VISIBLE);
                     error_msg.setText(R.string.pass_mismatch);
+                    rpassword.setBackgroundResource(R.drawable.fronttext);
                     validatedU();
                 }else {
                     rpassword.setError( " ",myIcon);
+                    rpassword.setBackgroundResource(R.drawable.backtext);
                     //rpassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.tick, 0);
                     password2 = rpassword.getText().toString();
                     error_msg.setVisibility(View.GONE);
@@ -231,12 +237,22 @@ public class CreateAccount extends AppCompatActivity {
                     Log.d("Shared_Pref","Count: "+count+" Val = "+email.getText().toString());
                     sharedPreferences.edit().putString(email_id+count, valid_email).apply();
                     elist.add(valid_email);
+
+                    //Reset fields after storing
                     email.setText("");
                     email.setError(null);
                     cpassword.setText("");
                     cpassword.setError(null);
                     rpassword.setText("");
                     rpassword.setError(null);
+                    error_email.setVisibility(View.GONE);
+                    error_msg.setVisibility(View.GONE);
+                    email.setBackgroundResource(0);
+                    cpassword.setBackgroundResource(0);
+                    rpassword.setBackgroundResource(0);
+                    email.setBackgroundColor(getResources().getColor(R.color.white));
+                    cpassword.setBackgroundColor(getResources().getColor(R.color.white));
+                    rpassword.setBackgroundColor(getResources().getColor(R.color.white));
                 }
             });
 
