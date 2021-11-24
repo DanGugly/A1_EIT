@@ -87,7 +87,6 @@ public class CreateAccount extends AppCompatActivity {
             public void beforeTextChanged(CharSequence s, int start, int count,
                                           int after) {
                 // Auto-generated method stub
-
             }
 
             @Override
@@ -104,19 +103,20 @@ public class CreateAccount extends AppCompatActivity {
                     edt.setError("Invalid Email Address");
                     //email.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.cross_foreground, 0, 0, 0);
                     valid_email = null;
-                    //if(valid!=0) valid-=1;
+
                 } else if (!isEmailValid(edt.getText().toString())) {
                     //edt.setError("Invalid Email Address");
                     error_email.setText(R.string.email_format);
                     error_email.setVisibility(View.VISIBLE);
                     //email.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.cross_foreground, 0, 0, 0);
-                    valid_email = null;
-                    //if(valid!=0) valid-=1;
+                    //valid_email = null;
+                    validatedU();
                 } else if (oldEmail(edt.getText().toString())) {
                     //edt.setError("Email Address already exists");
                     error_email.setText(R.string.email_dup);
                     error_email.setVisibility(View.VISIBLE);
-                    valid_email = null;
+                    //valid_email = null;
+                    validatedU();
                 }
                 else {
                     valid_email = edt.getText().toString();
@@ -166,6 +166,7 @@ public class CreateAccount extends AppCompatActivity {
                     //pw.setError("Password must contain at least 8 characters, 1 upper & lowercase");
                     error_msg.setVisibility(View.VISIBLE);
                     error_msg.setText(R.string.pass_invalid);
+                    validatedU();
                 }else {
                     password = pw.getText().toString();
                     //cpassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.tick, 0);
@@ -193,7 +194,7 @@ public class CreateAccount extends AppCompatActivity {
         rpassword.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+                //validatedU();
             }
 
             @Override
@@ -251,8 +252,9 @@ public class CreateAccount extends AppCompatActivity {
 
     private boolean validated(){
         //try {
-            if(!email.getText().toString().equals("") && !cpassword.getText().toString().equals("")
-                    && !rpassword.getText().toString().equals("")){
+            if(!valid_email.equals("") && email.getText().toString().equals(valid_email)
+                    && !password.equals("") && cpassword.getText().toString().equals(password)
+                    && !password2.equals("") && rpassword.getText().toString().equals(password2)){
                 //next.setAlpha(1);
                 //next.setEnabled(true);
                 return true;
@@ -267,8 +269,10 @@ public class CreateAccount extends AppCompatActivity {
     }
     private void validatedU(){
         try {
-            if(!valid_email.equals("") && !password.equals("")
-                    && !password2.equals("")){
+            if(!valid_email.equals("") && email.getText().toString().equals(valid_email)
+                    && !password.equals("") && cpassword.getText().toString().equals(password)
+                    && !password2.equals("") && rpassword.getText().toString().equals(password2))
+            {
                 next.setAlpha(1);
             }else {
                 next.setAlpha(0.5F);

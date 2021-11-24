@@ -13,7 +13,7 @@
     <string name="create_an_account">Create an account</string>
     <string name="next">NEXT</string>
     <string name="email_dup">An account already exists for this email address</string>
-    <string name="email_format">Email address is not valid</string>
+    <string name="email_format">Email address is not valid                   </string>
     <string name="pass_mismatch">Your passwords dont match</string>
     <string name="pass_invalid">One of the passwords entered wasn\'t valid</string>
 </resources>
