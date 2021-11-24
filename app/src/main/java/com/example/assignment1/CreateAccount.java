@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -22,6 +23,7 @@ import java.util.regex.Pattern;
 public class CreateAccount extends AppCompatActivity {
 
     private EditText email, cpassword, rpassword;
+    private TextView error_msg, error_email;
     private Button next;
     private String valid_email;
     private String password;
@@ -42,6 +44,9 @@ public class CreateAccount extends AppCompatActivity {
         email = findViewById(R.id.emailAddress);
         cpassword = findViewById(R.id.createdPassword);
         rpassword = findViewById(R.id.repeatedPassword);
+
+        error_msg = findViewById(R.id.error_text);
+        error_email = findViewById(R.id.error_text_email);
 
         myIcon = getResources().getDrawable(R.mipmap.tick_foreground);
         myIcon.setBounds(0, 0, 170, 170);
@@ -101,28 +106,30 @@ public class CreateAccount extends AppCompatActivity {
                     valid_email = null;
                     //if(valid!=0) valid-=1;
                 } else if (!isEmailValid(edt.getText().toString())) {
-                    edt.setError("Invalid Email Address");
+                    //edt.setError("Invalid Email Address");
+                    error_email.setText(R.string.email_format);
+                    error_email.setVisibility(View.VISIBLE);
                     //email.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.cross_foreground, 0, 0, 0);
                     valid_email = null;
                     //if(valid!=0) valid-=1;
                 } else if (oldEmail(edt.getText().toString())) {
-                    edt.setError("Email Address already exists");
-                    //email.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.cross_foreground, 0, 0, 0);
+                    //edt.setError("Email Address already exists");
+                    error_email.setText(R.string.email_dup);
+                    error_email.setVisibility(View.VISIBLE);
                     valid_email = null;
-                    //if(valid!=0) valid-=1;
                 }
                 else {
                     valid_email = edt.getText().toString();
                     Log.d("VALID", "Email valid");
                     cpassword.setFocusable(true);
                     validatedU();
-                    //valid+=1;
+                    error_email.setVisibility(View.GONE);
+                    error_email.setText("");
 
                     //email.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.tick, 0);
 
                     //email.setError(null);
                     email.setError( "",myIcon);
-                    //email.setHighlightColor(R.color.teal_200);
                 }
             }
 
@@ -156,12 +163,16 @@ public class CreateAccount extends AppCompatActivity {
                 if(String.valueOf(pw.getText())==null){
                     pw.setError("Invalid Password");
                 }else if(!validpass(pw.getText().toString())){
-                    pw.setError("Password must contain at least 8 characters, 1 upper & lowercase");
+                    //pw.setError("Password must contain at least 8 characters, 1 upper & lowercase");
+                    error_msg.setVisibility(View.VISIBLE);
+                    error_msg.setText(R.string.pass_invalid);
                 }else {
                     password = pw.getText().toString();
                     //cpassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.tick, 0);
                     cpassword.setError( " ",myIcon);
                     rpassword.setFocusable(true);
+                    error_msg.setVisibility(View.GONE);
+                    error_msg.setText("");
                     validatedU();
                     Log.d("VALID", "Password valid");
                 }
@@ -193,12 +204,16 @@ public class CreateAccount extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 if(rpassword.getText().toString()==null||!(cpassword.getText().toString().equals(rpassword.getText().toString()))){
-                    rpassword.setError("Passwords don't match!");
+                    //rpassword.setError("Passwords don't match!");
+                    error_msg.setVisibility(View.VISIBLE);
+                    error_msg.setText(R.string.pass_mismatch);
                     validatedU();
                 }else {
                     rpassword.setError( " ",myIcon);
                     //rpassword.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.tick, 0);
                     password2 = rpassword.getText().toString();
+                    error_msg.setVisibility(View.GONE);
+                    error_msg.setText("");
                     Log.d("VALID", "Repeated Password valid");
                     validatedU();
                 }

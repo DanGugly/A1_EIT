@@ -59,14 +59,28 @@
             android:text="@string/email_address"
             android:textColor="@color/white" />
 
-        <EditText
-            android:id="@+id/emailAddress"
+            <EditText
+                android:id="@+id/emailAddress"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/white"
+                android:ems="10"
+                android:inputType="textEmailAddress"
+                tools:ignore="SpeakableTextPresentCheck" />
+            <TextView
+            android:id="@+id/error_text_email"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/white"
-            android:ems="10"
-            android:inputType="textEmailAddress"
-            tools:ignore="SpeakableTextPresentCheck" />
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            android:padding="10dp"
+            android:text=""
+            android:textColor="@color/white"
+            app:drawableStartCompat="@drawable/cross_foreground">
+
+        </TextView>
+
 
         <TextView
             android:id="@+id/createPassword"
@@ -107,12 +121,26 @@
             tools:ignore="SpeakableTextPresentCheck" />
 
         <TextView
+            android:id="@+id/error_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:textAlignment="center"
+            android:textSize="15sp"
+            android:padding="10dp"
+            android:text=""
+            android:textColor="@color/white"
+            app:drawableStartCompat="@drawable/cross_foreground">
+
+        </TextView>
+
+        <TextView
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="14sp"
             android:paddingTop="30dp"
-            android:paddingBottom="30dp"
+            android:paddingBottom="15dp"
             android:text="@string/password_note"
             android:textColor="@color/white" />
     </LinearLayout>
