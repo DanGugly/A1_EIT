@@ -1,6 +1,8 @@
 package com.example.assignment1;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.content.res.ResourcesCompat;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -47,6 +49,10 @@ public class CreateAccount extends AppCompatActivity {
         error_msg = findViewById(R.id.error_text);
         error_email = findViewById(R.id.error_text_email);
 
+        // when we have this kind of warnings lets try to solve it
+        // it also says it is deprecated on API 22
+        // AppCompatResources.getDrawable(getBaseContext(), R.mipmap.tick_foreground);
+
         myIcon = getResources().getDrawable(R.mipmap.tick_foreground);
         myIcon.setBounds(0, 0, 170, 170);
 
@@ -66,6 +72,11 @@ public class CreateAccount extends AppCompatActivity {
                 elist.add(sharedPreferences.getString(email_id+x, null));
             }
         }
+
+        // just a observation here and there... don't commit and push commented code
+        // since that can be a caused of security leak.
+        // it is good for comments but not for actual logic
+
         //elist.add("test@123.com");
     }
 
@@ -183,6 +194,9 @@ public class CreateAccount extends AppCompatActivity {
                 }
             }
             public boolean validpass(final String pw){
+
+                // good use of patterns to check the validation
+
                 Pattern uppercase = Pattern.compile("[A-Z]");
                 Pattern lowercase = Pattern.compile("[a-z]");
                 Pattern digit = Pattern.compile("[0-9]");
@@ -235,6 +249,9 @@ public class CreateAccount extends AppCompatActivity {
                     if(count<2) count=2; else count++;
                     sharedPreferences.edit().putInt(counts, count).apply();
                     Log.d("Shared_Pref","Count: "+count+" Val = "+email.getText().toString());
+
+                    // nice implementation for the counter
+
                     sharedPreferences.edit().putString(email_id+count, valid_email).apply();
                     elist.add(valid_email);
 
@@ -261,6 +278,11 @@ public class CreateAccount extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
+
+                // This way to start the activity is used when you need to perform any kind of question
+                // lets say you want to execute certain logic when this request code is received by the 'MainActivity'
+                // a normal call should be 'startActivity(myIntent)'
+
                 startActivityForResult(myIntent, 0);
             }
         });
