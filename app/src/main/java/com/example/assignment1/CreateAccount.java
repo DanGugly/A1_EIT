@@ -289,6 +289,8 @@ public class CreateAccount extends AppCompatActivity {
     }
 
     private boolean validated(){
+        // all commented code should be removed
+
         //try {
             if(!valid_email.equals("") && email.getText().toString().equals(valid_email)
                     && !password.equals("") && cpassword.getText().toString().equals(password)
